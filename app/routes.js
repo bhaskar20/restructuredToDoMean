@@ -1,8 +1,10 @@
+
 var ToDo = require('./models/todo');
 
 module.exports = function(app) {
 	app.get('/api/todos',function (req,res) {
 		ToDo.find(function (err,todos) {
+			console.log("in get");
 			if(err){
 				res.send(err);
 			}
@@ -14,6 +16,7 @@ module.exports = function(app) {
 			text:req.body.text,
 			done:false
 		},function (err,todo) {
+			console.log('in post');
 			if(err){
 				res.send(err);
 			}

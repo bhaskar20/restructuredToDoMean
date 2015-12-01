@@ -1,5 +1,5 @@
 angular.module('todoService', [])
-    .factory('Todos', function($http) {
+    .factory('Todos',function($http) {
         return {
             get : function() {
                 return $http.get('/api/todos');

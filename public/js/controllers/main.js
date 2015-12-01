@@ -1,14 +1,15 @@
-angular.module('todoController', [])
-    .controller('mainController', function($scope, $http,Todos) {
+angular.module('todoController', ['todoService'])
+    .controller('mainController',function($scope,Todos) {
         $scope.formData = {};
-
+        $scope.todos = {};
          Todos.get()
             .success(function(data) {
                 $scope.todos = data;
             });
 
         // when submitting the add form, send the text to the node API
-        $scope.createTodo = function() {
+        $scope.createToDo = function() {
+            console.log("create");
             if (!$.isEmptyObject($scope.formData)) {
                  Todos.create($scope.formData)
                     .success(function(data) {
@@ -18,13 +19,11 @@ angular.module('todoController', [])
                 }
             };
         // delete a todo after checking it
-        $scope.deleteTodo = function(id) {
+        $scope.deleteToDo = function(id) {
             Todos.delete(id)
                 // if successful creation, call our get function to get all the new todos
                 .success(function(data) {
                     $scope.todos = data; // assign our new list of todos
                 });
         };
-    });
-
     });
